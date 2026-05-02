@@ -1,0 +1,106 @@
+// Başarı Rozetleri
+let badgesExpanded = false;
+
+function toggleBadges() {
+    badgesExpanded = !badgesExpanded;
+    const container = document.getElementById('achievementBadges');
+    const toggle = document.getElementById('badgeToggle');
+    
+    if (badgesExpanded) {
+        container.style.maxHeight = 'none';
+        toggle.style.transform = 'rotate(180deg)';
+    } else {
+        container.style.maxHeight = '96px';
+        toggle.style.transform = 'rotate(0deg)';
+    }
+}
+
+function updateAchievementBadges() {
+    const badges = [];
+    const stats = userData.stats || {};
+    const words = userData.words || [];
+    const activities = userData.stats?.activities || [];
+    const folderCount = userData.folders?.length || 0;
+    const totalQuizzes = stats.totalQuizzes || 0;
+    const successRate = stats.averageScore || 0;
+    const masteredWords = stats.masteredWords || 0;
+    const streak = stats.streak || 0;
+    
+    // 1-10: Kelime Sayısı Rozetleri
+    badges.push({ icon: words.length >= 1 ? '🎯' : '🔒', title: 'İlk Adım', unlocked: words.length >= 1, progress: `${Math.min(words.length, 1)}/1` });
+    badges.push({ icon: words.length >= 10 ? '📝' : '🔒', title: 'Başlangıç', unlocked: words.length >= 10, progress: `${Math.min(words.length, 10)}/10` });
+    badges.push({ icon: words.length >= 50 ? '📚' : '🔒', title: 'Koleksiyoncu', unlocked: words.length >= 50, progress: `${Math.min(words.length, 50)}/50` });
+    badges.push({ icon: words.length >= 100 ? '📖' : '🔒', title: 'Kelime Canavarı', unlocked: words.length >= 100, progress: `${Math.min(words.length, 100)}/100` });
+    badges.push({ icon: words.length >= 150 ? '🎯' : '🔒', title: 'Kelime Avcısı', unlocked: words.length >= 150, progress: `${Math.min(words.length, 150)}/150` });
+    badges.push({ icon: words.length >= 250 ? '📚' : '🔒', title: 'Kütüphane', unlocked: words.length >= 250, progress: `${Math.min(words.length, 250)}/250` });
+    badges.push({ icon: words.length >= 350 ? '💼' : '🔒', title: 'Koleksiyoncu Pro', unlocked: words.length >= 350, progress: `${Math.min(words.length, 350)}/350` });
+    badges.push({ icon: words.length >= 500 ? '📕' : '🔒', title: 'Ansiklopedi', unlocked: words.length >= 500, progress: `${Math.min(words.length, 500)}/500` });
+    badges.push({ icon: words.length >= 750 ? '📜' : '🔒', title: 'Kelime Bilgini', unlocked: words.length >= 750, progress: `${Math.min(words.length, 750)}/750` });
+    badges.push({ icon: words.length >= 1000 ? '💰' : '🔒', title: 'Kelime Milyoneri', unlocked: words.length >= 1000, progress: `${Math.min(words.length, 1000)}/1000` });
+    
+    // 11-20: Seri Rozetleri
+    badges.push({ icon: streak >= 3 ? '🌱' : '🔒', title: 'İlk Hafta', unlocked: streak >= 3, progress: `${Math.min(streak, 3)}/3` });
+    badges.push({ icon: streak >= 7 ? '🔥' : '🔒', title: 'Ateş Topu', unlocked: streak >= 7, progress: `${Math.min(streak, 7)}/7` });
+    badges.push({ icon: streak >= 14 ? '📅' : '🔒', title: 'Günlük Rutin', unlocked: streak >= 14, progress: `${Math.min(streak, 14)}/14` });
+    badges.push({ icon: streak >= 21 ? '💪' : '🔒', title: 'Kararlı', unlocked: streak >= 21, progress: `${Math.min(streak, 21)}/21` });
+    badges.push({ icon: streak >= 30 ? '💥' : '🔒', title: 'Süper Seri', unlocked: streak >= 30, progress: `${Math.min(streak, 30)}/30` });
+    badges.push({ icon: streak >= 60 ? '🦸' : '🔒', title: 'Aylık Kahraman', unlocked: streak >= 60, progress: `${Math.min(streak, 60)}/60` });
+    badges.push({ icon: streak >= 100 ? '🌟' : '🔒', title: 'Efsane Seri', unlocked: streak >= 100, progress: `${Math.min(streak, 100)}/100` });
+    badges.push({ icon: streak >= 180 ? '🛡️' : '🔒', title: 'Demir İrade', unlocked: streak >= 180, progress: `${Math.min(streak, 180)}/180` });
+    badges.push({ icon: streak >= 365 ? '🎊' : '🔒', title: 'Yılın Serisi', unlocked: streak >= 365, progress: `${Math.min(streak, 365)}/365` });
+    badges.push({ icon: streak >= 500 ? '👑' : '🔒', title: 'Seri Kralı', unlocked: streak >= 500, progress: `${Math.min(streak, 500)}/500` });
+    
+    // 21-30: Quiz Rozetleri
+    badges.push({ icon: totalQuizzes >= 10 ? '🎮' : '🔒', title: 'Quiz Başlangıcı', unlocked: totalQuizzes >= 10, progress: `${Math.min(totalQuizzes, 10)}/10` });
+    badges.push({ icon: totalQuizzes >= 50 ? '🎯' : '🔒', title: 'Quiz Tutkunu', unlocked: totalQuizzes >= 50, progress: `${Math.min(totalQuizzes, 50)}/50` });
+    badges.push({ icon: totalQuizzes >= 100 ? '🏆' : '🔒', title: 'Quiz Ustası', unlocked: totalQuizzes >= 100, progress: `${Math.min(totalQuizzes, 100)}/100` });
+    badges.push({ icon: totalQuizzes >= 250 ? '🏃' : '🔒', title: 'Maraton Koşucusu', unlocked: totalQuizzes >= 250, progress: `${Math.min(totalQuizzes, 250)}/250` });
+    badges.push({ icon: totalQuizzes >= 500 ? '👑' : '🔒', title: 'Quiz Efsanesi', unlocked: totalQuizzes >= 500, progress: `${Math.min(totalQuizzes, 500)}/500` });
+    badges.push({ icon: totalQuizzes >= 750 ? '🏅' : '🔒', title: 'Süper Maraton', unlocked: totalQuizzes >= 750, progress: `${Math.min(totalQuizzes, 750)}/750` });
+    badges.push({ icon: totalQuizzes >= 1000 ? '⚡' : '🔒', title: 'Quiz Tanrısı', unlocked: totalQuizzes >= 1000, progress: `${Math.min(totalQuizzes, 1000)}/1000` });
+    badges.push({ icon: totalQuizzes >= 2000 ? '💫' : '🔒', title: 'Quiz İmparatoru', unlocked: totalQuizzes >= 2000, progress: `${Math.min(totalQuizzes, 2000)}/2000` });
+    badges.push({ icon: totalQuizzes >= 5000 ? '🌌' : '🔒', title: 'Quiz Evreni', unlocked: totalQuizzes >= 5000, progress: `${Math.min(totalQuizzes, 5000)}/5000` });
+    badges.push({ icon: totalQuizzes >= 10000 ? '🎖️' : '🔒', title: 'Quiz Efsanesi', unlocked: totalQuizzes >= 10000, progress: `${Math.min(totalQuizzes, 10000)}/10000` });
+    
+    // 31-40: Öğrenme Rozetleri
+    badges.push({ icon: masteredWords >= 10 ? '🧩' : '🔒', title: 'Hafıza Başlangıcı', unlocked: masteredWords >= 10, progress: `${Math.min(masteredWords, 10)}/10` });
+    badges.push({ icon: masteredWords >= 30 ? '🧠' : '🔒', title: 'Hafıza Şampiyonu', unlocked: masteredWords >= 30, progress: `${Math.min(masteredWords, 30)}/30` });
+    badges.push({ icon: masteredWords >= 50 ? '🏋️' : '🔒', title: 'Hafıza Atleti', unlocked: masteredWords >= 50, progress: `${Math.min(masteredWords, 50)}/50` });
+    badges.push({ icon: masteredWords >= 100 ? '🎓' : '🔒', title: 'Hafıza Dehası', unlocked: masteredWords >= 100, progress: `${Math.min(masteredWords, 100)}/100` });
+    badges.push({ icon: masteredWords >= 150 ? '🎭' : '🔒', title: 'Ezbere Karşı', unlocked: masteredWords >= 150, progress: `${Math.min(masteredWords, 150)}/150` });
+    badges.push({ icon: masteredWords >= 250 ? '👨‍🏫' : '🔒', title: 'Hafıza Profesörü', unlocked: masteredWords >= 250, progress: `${Math.min(masteredWords, 250)}/250` });
+    badges.push({ icon: masteredWords >= 300 ? '🌟' : '🔒', title: 'Mükemmel Hafıza', unlocked: masteredWords >= 300, progress: `${Math.min(masteredWords, 300)}/300` });
+    badges.push({ icon: masteredWords >= 500 ? '🥇' : '🔒', title: 'Hafıza Olimpiyatçısı', unlocked: masteredWords >= 500, progress: `${Math.min(masteredWords, 500)}/500` });
+    badges.push({ icon: masteredWords >= 750 ? '🏆' : '🔒', title: 'Hafıza Şampiyonu Pro', unlocked: masteredWords >= 750, progress: `${Math.min(masteredWords, 750)}/750` });
+    badges.push({ icon: masteredWords >= 1000 ? '💎' : '🔒', title: 'Hafıza Elması', unlocked: masteredWords >= 1000, progress: `${Math.min(masteredWords, 1000)}/1000` });
+    
+    // 41-50: Özel Rozetler
+    badges.push({ icon: successRate >= 70 && totalQuizzes >= 5 ? '👍' : '🔒', title: 'İyi Başlangıç', unlocked: successRate >= 70 && totalQuizzes >= 5, progress: `%${Math.round(successRate)}` });
+    badges.push({ icon: successRate >= 90 && totalQuizzes >= 10 ? '⭐' : '🔒', title: 'Mükemmeliyetçi', unlocked: successRate >= 90 && totalQuizzes >= 10, progress: `%${Math.round(successRate)}` });
+    badges.push({ icon: successRate >= 95 && totalQuizzes >= 20 ? '💎' : '🔒', title: 'Kusursuz', unlocked: successRate >= 95 && totalQuizzes >= 20, progress: `%${Math.round(successRate)}` });
+    badges.push({ icon: folderCount >= 5 ? '📁' : '🔒', title: 'Organizatör', unlocked: folderCount >= 5, progress: `${Math.min(folderCount, 5)}/5` });
+    badges.push({ icon: folderCount >= 10 ? '🗂️' : '🔒', title: 'Süper Organizatör', unlocked: folderCount >= 10, progress: `${Math.min(folderCount, 10)}/10` });
+    badges.push({ icon: folderCount >= 20 ? '📂' : '🔒', title: 'Arşivci', unlocked: folderCount >= 20, progress: `${Math.min(folderCount, 20)}/20` });
+    badges.push({ icon: activities.length >= 100 ? '🎪' : '🔒', title: 'Aktivite Canavarı', unlocked: activities.length >= 100, progress: `${Math.min(activities.length, 100)}/100` });
+    badges.push({ icon: activities.length >= 500 ? '🚀' : '🔒', title: 'Süper Aktif', unlocked: activities.length >= 500, progress: `${Math.min(activities.length, 500)}/500` });
+    badges.push({ icon: activities.length >= 1000 ? '💫' : '🔒', title: 'Hiper Aktif', unlocked: activities.length >= 1000, progress: `${Math.min(activities.length, 1000)}/1000` });
+    badges.push({ icon: words.length >= 1000 && masteredWords >= 500 && totalQuizzes >= 1000 && streak >= 100 ? '🏆' : '🔒', title: 'Akılda Kal Efsanesi', unlocked: words.length >= 1000 && masteredWords >= 500 && totalQuizzes >= 1000 && streak >= 100, progress: 'Efsane!' });
+    
+    // Rozetleri göster
+    const unlockedCount = badges.filter(b => b.unlocked).length;
+    const badgeCountEl = document.getElementById('badgeCount');
+    if (badgeCountEl) {
+        badgeCountEl.textContent = `(${unlockedCount}/50)`;
+    }
+    
+    const badgesContainer = document.getElementById('achievementBadges');
+    if (badgesContainer) {
+        badgesContainer.innerHTML = badges.map(badge => `
+            <div class="border-2 ${badge.unlocked ? 'bg-gradient-to-br from-yellow-50 to-orange-50 border-yellow-300 dark:from-yellow-900 dark:to-orange-900 dark:border-yellow-600' : 'bg-gray-50 border-gray-200 dark:bg-gray-700 dark:border-gray-600'} rounded-lg p-2 text-center transition-all hover:scale-105 ${badge.unlocked ? '' : 'opacity-50'}">
+                <div class="text-3xl mb-1">${badge.icon}</div>
+                <p class="font-bold text-xs text-gray-800 dark:text-white">${badge.title}</p>
+                <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">${badge.progress}</p>
+            </div>
+        `).join('');
+    }
+}

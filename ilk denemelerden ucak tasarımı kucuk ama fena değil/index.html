@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>F-22 Raptor — Açık Dünya Uçuş Simülasyonu</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+
+  <div id="hud">
+    <div class="hud-row"><span>Hız</span> <strong id="speed">0</strong> <span>km/saat</span></div>
+    <div class="hud-row"><span>Yükseklik</span> <strong id="altitude">0</strong> <span>m</span></div>
+    <div class="hud-row"><span>Eğim</span> <strong id="pitch">0</strong>°</div>
+    <div class="hud-row"><span>Yön</span> <strong id="heading">0</strong>°</div>
+    <div class="hud-row"><span>G</span> <strong id="gforce">1.0</strong></div>
+    <div class="hud-row"><span>AoA</span> <strong id="aoa">0</strong>°</div>
+    <div class="hud-row"><span>Rüzgar</span> <strong id="wind">—</strong></div>
+    <div class="hud-row"><span>q</span> <strong id="dynpress">0</strong> <span>kPa</span></div>
+    <div class="hud-row"><span>Yapı yükü</span> <strong id="stress">0</strong> <span>%</span></div>
+  </div>
+  <div id="g-warn" aria-live="polite"></div>
+  <div id="crash-msg" aria-live="assertive"></div>
+  <div id="help">
+    <h3>Kontroller</h3>
+    <p><kbd>W</kbd> Gaz</p>
+    <p><kbd>S</kbd> Yavaşlat</p>
+    <p><kbd>A</kbd> / <kbd>D</kbd> Dönüş</p>
+    <p><kbd>↑</kbd> / <kbd>↓</kbd> Tırman / Dal</p>
+    <p><kbd>F</kbd> En yakın pistte yeniden doğ</p>
+    <p class="hint">Fare tıkla (kilitle): uçağın tam etrafında 360° dolaş; tekerlek = zoom. Kamera uçağın merkezine
+      bakar. Yapı yükü birikir — güvenli uçuşta düşer; sınırda kırılır. Kasaba / arazi çarpışması anında hasar.</p>
+  </div>
+  <canvas id="c"></canvas>
+  <script src="https://unpkg.com/three@0.160.0/build/three.min.js"></script>
+  <script src="game.js"></script>
+</body>
+
+</html>

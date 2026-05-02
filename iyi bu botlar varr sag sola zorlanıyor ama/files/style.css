@@ -1,0 +1,167 @@
+* { margin:0; padding:0; box-sizing:border-box; }
+
+html, body {
+  width:100%; height:100%;
+  overflow:hidden;
+  font-family: "Courier New", "Consolas", monospace;
+  background:#060d1a;
+}
+
+#c {
+  display:block; width:100%; height:100%;
+  cursor:grab;
+}
+#c:active { cursor:grabbing; }
+
+/* ── HUD ─────────────────────────────────── */
+#hud {
+  position:fixed; top:22px; left:22px; z-index:10;
+  color:#00e5ff;
+  text-shadow: 0 0 10px rgba(0,200,255,0.55), 0 0 22px rgba(0,180,255,0.25);
+  font-size:13px; line-height:1.75;
+  pointer-events:none;
+  user-select:none;
+  background:
+    linear-gradient(135deg, rgba(0,30,60,0.72) 0%, rgba(0,10,30,0.55) 100%);
+  border:1px solid rgba(0,200,255,0.22);
+  border-radius:8px;
+  padding:14px 18px;
+  backdrop-filter:blur(4px);
+  min-width:200px;
+}
+
+#hud::before {
+  content:"F-22 RAPTOR";
+  display:block;
+  font-size:10px;
+  letter-spacing:0.22em;
+  color:rgba(0,200,255,0.6);
+  margin-bottom:10px;
+  border-bottom:1px solid rgba(0,200,255,0.18);
+  padding-bottom:6px;
+}
+
+#hud .hud-row {
+  display:flex;
+  gap:8px;
+  align-items:baseline;
+}
+
+#hud .hud-row > span:first-child {
+  min-width:78px;
+  color:rgba(0,210,255,0.65);
+  font-size:11px;
+  letter-spacing:0.06em;
+  text-transform:uppercase;
+}
+
+#hud strong {
+  font-variant-numeric:tabular-nums;
+  min-width:5em;
+  color:#ffffff;
+  text-shadow: 0 0 8px rgba(255,255,255,0.35);
+}
+
+#hud .hud-row > span:last-child {
+  color:rgba(0,200,255,0.45);
+  font-size:10px;
+}
+
+/* ── G Warning ─────────────────────────── */
+#g-warn {
+  position:fixed;
+  top:50%; left:50%;
+  transform:translate(-50%, -130px);
+  z-index:20;
+  padding:12px 26px;
+  border-radius:6px;
+  font-size:1.05rem;
+  font-weight:700;
+  letter-spacing:0.09em;
+  color:#fff;
+  background:rgba(200,30,10,0.90);
+  border:1.5px solid rgba(255,100,60,0.8);
+  box-shadow:0 0 32px rgba(255,50,20,0.55), inset 0 0 12px rgba(255,100,50,0.15);
+  text-align:center;
+  pointer-events:none;
+  opacity:0;
+  transition:opacity 0.12s ease;
+  font-family:"Courier New", monospace;
+}
+#g-warn.visible { opacity:1; }
+
+/* ── Crash message ─────────────────────── */
+#crash-msg {
+  position:fixed;
+  bottom:130px; left:50%;
+  transform:translateX(-50%);
+  z-index:20;
+  padding:18px 36px;
+  border-radius:10px;
+  font-size:1rem;
+  color:#d8eeff;
+  background:rgba(8,18,36,0.94);
+  border:1px solid rgba(255,100,80,0.50);
+  text-align:center;
+  pointer-events:none;
+  opacity:0;
+  transition:opacity 0.2s ease;
+  max-width:90vw;
+  font-family:"Courier New", monospace;
+  letter-spacing:0.04em;
+  box-shadow:0 4px 40px rgba(0,0,0,0.6);
+  backdrop-filter:blur(6px);
+}
+#crash-msg.visible { opacity:1; }
+
+/* ── Help panel ────────────────────────── */
+#help {
+  position:fixed;
+  bottom:22px; right:22px;
+  z-index:10;
+  background:rgba(6,16,34,0.88);
+  border:1px solid rgba(0,180,255,0.25);
+  border-radius:8px;
+  padding:16px 20px;
+  color:#90b8d0;
+  font-size:12px;
+  max-width:280px;
+  backdrop-filter:blur(4px);
+}
+
+#help h3 {
+  color:#00d4ff;
+  font-size:10px;
+  text-transform:uppercase;
+  letter-spacing:0.14em;
+  margin-bottom:10px;
+  text-shadow:0 0 8px rgba(0,200,255,0.4);
+}
+
+#help p {
+  margin:5px 0;
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+
+#help kbd {
+  display:inline-block;
+  min-width:28px;
+  padding:2px 7px;
+  background:#0d2040;
+  border:1px solid #1a4060;
+  border-radius:3px;
+  font-family:inherit;
+  font-size:11px;
+  color:#a0d4f0;
+  text-align:center;
+}
+
+#help .hint {
+  margin-top:10px;
+  font-size:10px;
+  color:#4a7090;
+  font-style:italic;
+  line-height:1.5;
+}

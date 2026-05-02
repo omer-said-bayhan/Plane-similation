@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>F-22 Raptor — Gerçekçi Uçuş Simülasyonu</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div id="hud">
+    <div class="hud-row"><span>Hız</span>      <strong id="speed">0</strong>    <span>km/s</span></div>
+    <div class="hud-row"><span>Mach</span>     <strong id="mach">0.00</strong></div>
+    <div class="hud-row"><span>Yükseklik</span><strong id="altitude">0</strong> <span>m</span></div>
+    <div class="hud-row"><span>Eğim</span>     <strong id="pitch">0</strong>    <span>°</span></div>
+    <div class="hud-row"><span>Yön</span>      <strong id="heading">0</strong>  <span>°</span></div>
+    <div class="hud-row"><span>Banka</span>    <strong id="roll">0</strong>     <span>°</span></div>
+    <div class="hud-row"><span>G</span>        <strong id="gforce">1.0</strong></div>
+    <div class="hud-row"><span>AoA</span>      <strong id="aoa">0</strong>      <span>°</span></div>
+    <div class="hud-row"><span>Gaz</span>      <strong id="throttle">35</strong><span>%</span></div>
+    <div class="hud-row"><span>Rüzgar</span>   <strong id="wind">—</strong></div>
+    <div class="hud-row"><span>q</span>        <strong id="dynpress">0</strong>  <span>kPa</span></div>
+    <div class="hud-row"><span>Yapı Yükü</span><strong id="stress">0</strong>  <span>%</span></div>
+  </div>
+
+  <div id="g-warn" aria-live="polite"></div>
+  <div id="crash-msg" aria-live="assertive"></div>
+
+  <div id="help">
+    <h3>Kontroller</h3>
+    <p><kbd>W</kbd> Gaz artır (AB &gt;%85)</p>
+    <p><kbd>S</kbd> Gaz azalt / fren</p>
+    <p><kbd>A</kbd> / <kbd>D</kbd> Yaw + kısmi roll</p>
+    <p><kbd>Q</kbd> / <kbd>E</kbd> Roll sol / sağ</p>
+    <p><kbd>↑</kbd> / <kbd>↓</kbd> Tırman / Dal</p>
+    <p><kbd>F</kbd> En yakın piste yeniden doğ</p>
+    <p class="hint">
+      Sol tık (pointer lock): orbital kamera.<br>
+      Tekerlek: zoom. Mach &gt;0.85 → ses duvarı etkisi.<br>
+      Gerçek ISA atmosfer modeli. Yüksekte hava seyrelir,<br>
+      kaldırma kuvveti düşer. G-limit: +9G / −3G.
+    </p>
+  </div>
+
+  <canvas id="c"></canvas>
+
+  <script src="https://unpkg.com/three@0.160.0/build/three.min.js"></script>
+  <script src="game.js"></script>
+</body>
+</html>
